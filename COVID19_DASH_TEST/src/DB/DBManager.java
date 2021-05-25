@@ -16,33 +16,33 @@ import javaParse.parseSearch;
 
 public class DBManager {
 	private final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private final String DB_URL = "jdbc:mysql://192.168.0.4:3306/COVID_DASH?characterEncoding=UTF-8&serverTimezone=UTC";
-    private final String USER_NAME ="root";
-    private final String PASSWORD = "as153462";
+    private final String DB_URL = "jdbc:mysql://localhost:3306/COVID_DASH?characterEncoding=UTF-8&serverTimezone=UTC";
+    private final String USER_NAME =""; // id
+    private final String PASSWORD = ""; // pwd
     
     Connection conn = null;
     Statement state = null;
     ResultSet rs = null;
     
-    String[] sibe = {"../imgs/¼­¿ïÆ¯º°½Ã.jpg",
-			"../imgs/ºÎ»ê±¤¿ª½Ã.jpg",
-			"../imgs/´ë±¸±¤¿ª½Ã.png",
-			"../imgs/ÀÎÃµ±¤¿ª½Ã.jpg",
-			"../imgs/±¤ÁÖ±¤¿ª½Ã.png",
-			"../imgs/´ëÀü±¤¿ª½Ã.gif",
-			"../imgs/¿ï»ê±¤¿ª½Ã.png",
-			"../imgs/¼¼Á¾Æ¯º°ÀÚÄ¡½Ã.png",
-			"../imgs/°æ±âµµ.jpg",
-			"../imgs/°­¿øµµ.png",
-			"../imgs/ÃæÃ»ºÏµµ.png",
-			"../imgs/ÃæÃ»³²µµ.png",
-			"../imgs/Àü¶óºÏµµ.gif",
-			"../imgs/Àü¶ó³²µµ.jpg",
-			"../imgs/°æ»óºÏµµ.png",
-			"../imgs/°æ»ó³²µµ.png",
-			"../imgs/Á¦ÁÖÆ¯º°ÀÚÄ¡µµ.jpg",};
+    String[] sibe = {"../imgs/ì„œìš¸íŠ¹ë³„ì‹œ.jpg",
+			"../imgs/ë¶€ì‚°ê´‘ì—­ì‹œ.jpg",
+			"../imgs/ëŒ€êµ¬ê´‘ì—­ì‹œ.png",
+			"../imgs/ì¸ì²œê´‘ì—­ì‹œ.jpg",
+			"../imgs/ê´‘ì£¼ê´‘ì—­ì‹œ.png",
+			"../imgs/ëŒ€ì „ê´‘ì—­ì‹œ.gif",
+			"../imgs/ìš¸ì‚°ê´‘ì—­ì‹œ.png",
+			"../imgs/ì„¸ì¢…íŠ¹ë³„ìì¹˜ì‹œ.png",
+			"../imgs/ê²½ê¸°ë„.jpg",
+			"../imgs/ê°•ì›ë„.png",
+			"../imgs/ì¶©ì²­ë¶ë„.png",
+			"../imgs/ì¶©ì²­ë‚¨ë„.png",
+			"../imgs/ì „ë¼ë¶ë„.gif",
+			"../imgs/ì „ë¼ë‚¨ë„.jpg",
+			"../imgs/ê²½ìƒë¶ë„.png",
+			"../imgs/ê²½ìƒë‚¨ë„.png",
+			"../imgs/ì œì£¼íŠ¹ë³„ìì¹˜ë„.jpg",};
     
-    String[] sibeName = {"¼­¿ï","ºÎ»ê","´ë±¸","ÀÎÃµ","±¤ÁÖ","´ëÀü","¿ï»ê","¼¼Á¾","°æ±âµµ","°­¿øµµ","ÃæÃ»ºÏµµ","ÃæÃ»³²µµ","Àü¶óºÏµµ","Àü¶ó³²µµ","°æ»óºÏµµ","°æ»ó³²µµ","Á¦ÁÖµµ"};
+    String[] sibeName = {"ì„œìš¸","ë¶€ì‚°","ëŒ€êµ¬","ì¸ì²œ","ê´‘ì£¼","ëŒ€ì „","ìš¸ì‚°","ì„¸ì¢…","ê²½ê¸°ë„","ê°•ì›ë„","ì¶©ì²­ë¶ë„","ì¶©ì²­ë‚¨ë„","ì „ë¼ë¶ë„","ì „ë¼ë‚¨ë„","ê²½ìƒë¶ë„","ê²½ìƒë‚¨ë„","ì œì£¼ë„"};
     
     public DBManager() {
        
@@ -60,16 +60,16 @@ public class DBManager {
 
     public void insert(int i, int j, int k) {
     	
-        // search ÇÔ¼ö È£Ãâ
+        // search í•¨ìˆ˜ í˜¸ì¶œ
     	parseSearch parse = new parseSearch();
     	parse.search();
     	dateTime time = new dateTime();
     	
-    	//µ¥ÀÌÅÍº£ÀÌ½º¿¡ µé¾î°¡´Â ½Ã°£ Æ÷¸Ë 
+    	//ë°ì´í„°ë² ì´ìŠ¤ì— ë“¤ì–´ê°€ëŠ” ì‹œê°„ í¬ë§· 
     	System.out.print(time.date());
     	System.out.print(time.dateTime());
     	
-    	//Äõ¸®¹® ÀÔ·Â
+    	//ì¿¼ë¦¬ë¬¸ ì…ë ¥
     	String sqlsum = "insert into area_parse (date, datetime, cityname, confirmed_p) Values ('"+time.date()+"', '"+time.dateTime()+"', '"+sibeName[j]+"', '"+parse.getSumLine(i)+"');";
     	String sqlsum2 = "insert into covid_parse (date, confirmed_p, recov_p, death_p) Values ('"+time.date()+"', '"+parse.getSumLine(3)+"', '"+parse.getSumLine(5)+"', '"+parse.getSumLine(6)+"');";
     	
